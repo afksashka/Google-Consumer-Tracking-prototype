@@ -1,0 +1,66 @@
+plugins {
+    id "com.google.cloud.artifactregistry.gradle-plugin" version "2.1.5"
+}
+repositories {
+    maven {
+        url "artifactregistry://us-west2-maven.pkg.dev/gmp-artifacts/transportation"
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+
+android {
+    namespace 'com.example.google_consumer_tracking'
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.example.google_consumer_tracking"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    api "com.google.auto.value:auto-value-annotations:$autoValueVersion"
+    annotationProcessor "com.google.auto.value:auto-value:$autoValueVersion"
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata:$liveDataVersion"
+    implementation "androidx.core:core-ktx:$androidxCoreVersion"
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    implementation "androidx.cardview:cardview:$cardViewVersion"
+    implementation "com.google.android.gms:play-services-maps:$playServicesMapVesion"
+    implementation "com.google.android.gms:play-services-location:$gmsLocationVersion"
+    implementation "com.google.android.gms:play-services-tasks:$gmsTasksVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "com.google.guava:guava:$guavaVersion"
+    implementation "joda-time:joda-time:$jodaTimeVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2Version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2Version"
+    implementation "com.squareup.retrofit2:adapter-guava:$retrofit2Version"
+    implementation "org.checkerframework:checker-qual:$checkerVersion"
+    implementation "com.google.android.libraries.mapsplatform.transportation:transportation-consumer:$consumerSdkVersion"
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$anroidxJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+}
